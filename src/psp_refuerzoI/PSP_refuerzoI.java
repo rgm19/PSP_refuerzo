@@ -1,4 +1,4 @@
-package psp_refuerzoi;
+package psp_refuerzoI;
 
 import java.io.BufferedReader;
 import java.io.IOException;
