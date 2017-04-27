@@ -12,12 +12,13 @@ import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESedeKeySpec;
+import static java.util.Arrays.copyOf;
 
 /**
  *
  * @author usuario5
  */
-public class CifradoBase46 {
+public class CifradoBase64 {
     //para cifrar
     public static String cifrarBase64(byte [] a){
         Base64.Encoder encoder = Base64.getEncoder();
