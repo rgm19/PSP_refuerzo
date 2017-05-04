@@ -1,17 +1,25 @@
 package psp_refuerzoVI;
 
-public class cifrar{
+import java.security.spec.KeySpec;
+import static java.util.Arrays.copyOf;
+import java.util.Base64;
+import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.DESedeKeySpec;
+
+public class Cifrar{
 	
 	public static String cifrar(byte[]a){
-		Base64.encoder encoder = Base64.getEncoder();
+		Base64.Encoder encoder = Base64.getEncoder();
 		String b = encoder.encodeToString(a);
 		return b;
 	}
 
 	public static String descifrar(String a){
-		Base64.decoder decode = Base64.getDecoder();
-		byte [] arraydecode = decoder.decode(a);
-		String b = arraydecode.toString();
+		Base64.Decoder decode = Base64.getDecoder();
+		byte [] arraydecode = decode.decode(a);
+		String b = new String(arraydecode);
 		return b;
 	}
 
@@ -20,8 +28,10 @@ public class cifrar{
 		SecretKeyFactory skf;
 		Cipher cifrar;
 		SecretKey clave_priv;
-        String clave="ClaveCifrado";
-        String frase ="FraseQueCifraremos";
+                String clave="ClaveCifrado";
+                String frase ="ruben";
+                byte []bytesfrasecifrada=null;
+                byte[] bytesdescifradafrase=null;
 
 		try{
 			//fase 1
@@ -33,7 +43,7 @@ public class cifrar{
 
 			skf = SecretKeyFactory.getInstance("DESede");
 
-			clave_priv = skf.generateSecret(ks):
+			clave_priv = skf.generateSecret(ks);
 
 			cifrar = Cipher.getInstance("DESede");
 
@@ -41,24 +51,24 @@ public class cifrar{
 
 			//fase 2
 			byte[]bytesfrase = frase.getBytes("UTF8");
-			cifrar.init(Ciphet.Encrypt_Mode, clave_priv);
-			byte []bytesfrasecifrada = doFinal(bytesfrase);
+			cifrar.init(Cipher.ENCRYPT_MODE, clave_priv);
+			bytesfrasecifrada = cifrar.doFinal(bytesfrase);
 
 
 
 			//fase 3
-			cifrar.init(Cipher.Descrypy_MODE, clave_priv);
-			byte[] bytesdescifradafrase = cifrar.doFinal(bytescifradafrase);
+			cifrar.init(Cipher.DECRYPT_MODE, clave_priv);
+			bytesdescifradafrase = cifrar.doFinal(bytesfrasecifrada);
 			
 		}catch(Exception e){}
 	
 			       System.out.println("Frase Original: " + frase);
       			 System.out.println("Frase cifrada utilizando TripleDES (DESede)");
-       System.out.println(cifrarBase64(befrase));
+       System.out.println(cifrar(bytesfrasecifrada));
        System.out.println("Frase vuelta a descifrar: ");
 
-		String frasedescifrada = cifrarBase64(bytesdescifradafrase);
-		System.out.println(ddescifrarBase64(df));
+		String df = cifrar(bytesdescifradafrase);
+		System.out.println(descifrar(df));
 
 		
 		}

@@ -29,7 +29,7 @@ public class CifradoBase64 {
     public static String descifrarBase64(String a){
         Base64.Decoder decoder = Base64.getDecoder();
         byte[] decodedByteArray = decoder.decode(a);
-        String b = decodedByteArray.toString();
+        String b = new String(decodedByteArray);
         return b;
     }
     
